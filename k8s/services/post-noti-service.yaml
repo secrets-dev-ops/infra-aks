@@ -4,6 +4,8 @@ metadata:
   name: post-noti-service
   namespace: backend-services-ns
 spec:
+  selector:
+    app: twitter-post-noti
   ports:
     - protocol: TCP
       port: 3004

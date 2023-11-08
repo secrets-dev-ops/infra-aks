@@ -4,6 +4,8 @@ metadata:
   name: user-service
   namespace: backend-services-ns
 spec:
+  selector:
+    app: twitter-user
   ports:
     - protocol: TCP
       port: 3001

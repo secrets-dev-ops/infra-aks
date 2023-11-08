@@ -4,6 +4,8 @@ metadata:
   name: auth-service
   namespace: backend-services-ns
 spec:
+  selector:
+    app: twitter-auth
   ports:
     - protocol: TCP
       port: 3002

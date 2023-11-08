@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - back-ns.yaml
   - front-ns.yaml
+  - metrics-ns.yaml

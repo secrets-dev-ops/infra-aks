@@ -7,3 +7,4 @@ resources:
   - pods/
   - services/
   - ingress/
+  - secrets/
