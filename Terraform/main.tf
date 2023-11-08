@@ -1,4 +1,6 @@
-
+provider "azurerm" {
+  features {}
+}
 ### -----------------------NETWORK--------------------- ###
 # Creación de la red virtual
 resource "azurerm_virtual_network" "main" {

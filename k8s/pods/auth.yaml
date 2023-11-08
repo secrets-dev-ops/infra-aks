@@ -18,5 +18,16 @@ spec:
     containers:
     - name: twitter-auth
       image: acrtwitter.azurecr.io/twitter-auth-service:latest
+      env:
+      - name: DATABASE_URL
+        valueFrom:
+          secretKeyRef:
+            name: backend-secrets
+            key: database_url
+      - name: NEXTAUTH_JWT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: backend-secrets
+            key: next_auth_jwt_secret
       ports:
       - containerPort: 3002

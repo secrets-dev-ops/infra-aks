@@ -18,5 +18,11 @@ spec:
     containers:
     - name: twitter-user
       image: acrtwitter.azurecr.io/twitter-user-service:latest
+      env:
+      - name: DATABASE_URL
+        valueFrom:
+          secretKeyRef:
+            name: backend-secrets
+            key: database_url
       ports:
       - containerPort: 3001
