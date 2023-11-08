@@ -4,8 +4,10 @@ metadata:
   name: frontend-service
   namespace: frontend-ns
 spec:
+  selector:
+    app: twitter-front
   ports:
     - protocol: TCP
-      port: 30
+      port: 80
       targetPort: 3003
   type: ClusterIP

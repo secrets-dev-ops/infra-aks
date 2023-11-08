@@ -33,7 +33,7 @@ resource "random_integer" "ri" {
   max = 99999
 }
 
-resource "azurerm_cosmosdb_account" "db" {
+resource "azurerm_cosmosdb_account" "db_account" {
   name                = "tfex-cosmos-db-${random_integer.ri.result}"
   location            = var.region
   resource_group_name = var.resource_group_name
@@ -73,4 +73,11 @@ resource "azurerm_cosmosdb_account" "db" {
     location          = "westus"
     failover_priority = 0
   }
+}
+
+resource "azurerm_cosmosdb_mongo_database" "twitter-db" {
+  name                = "tfex-cosmos-mongo-db"
+  resource_group_name = azurerm_cosmosdb_account.db_account.resource_group_name
+  account_name        = azurerm_cosmosdb_account.db_account.name
+  throughput          = 400
 }

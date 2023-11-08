@@ -4,6 +4,8 @@ metadata:
   name: util-service
   namespace: backend-services-ns
 spec:
+  selector:
+    app: twitter-utils
   ports:
     - protocol: TCP
       port: 3000
