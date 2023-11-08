@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-noti
+  labels:
+   app: twitter-post-noti
+  namespace: backend-services-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+         app: twitter-post-noti
+  template:
+    metadata:
+      labels:
+        app:  twitter-post-noti
+  spec:
+    containers:
+    - name: twitter-post-noti
+      image: acrtwitter.azurecr.io/twitter-post-noti-service:latest
+      ports:
+      - containerPort: 3004

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+   app: twitter-front
+  namespace: frontend-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+         app:  twitter-front
+  template:
+    metadata:
+      labels:
+        app:  twitter-front
+  spec:
+  containers:
+  - name: twitter-front
+    image: acrtwitter.azurecr.io/twitter-frontend:latest
+    env:
+    - name: URL_UTIL
+      value: "http://util-service.backend-services-ns.svc.cluster.local:3000"
+    - name: URL_USER
+      value: "http://user-service.backend-services-ns.svc.cluster.local:3001"
+    - name: URL_AUTH
+      value: "http://auth-service.backend-services-ns.svc.cluster.local:3002"
+    - name: URL_POSTNOTI
+      value: "http://post-noti-service.backend-services-ns.svc.cluster.local:3004"
+    ports:
+    - containerPort: 3003
+

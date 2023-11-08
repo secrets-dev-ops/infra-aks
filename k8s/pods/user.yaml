@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+   app: twitter-user
+  namespace: backend-services-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+         app: twitter-user
+  template:
+    metadata:
+      labels:
+        app:  twitter-user
+  spec:
+    containers:
+    - name: twitter-user
+      image: acrtwitter.azurecr.io/twitter-user-service:latest
+      ports:
+      - containerPort: 3001

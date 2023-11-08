@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+   app: twitter-auth
+  namespace: backend-services-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+         app:  twitter-auth
+  template:
+    metadata:
+      labels:
+        app:  twitter-auth
+  spec:
+    containers:
+    - name: twitter-auth
+      image: acrtwitter.azurecr.io/twitter-auth-service:latest
+      ports:
+      - containerPort: 3002
