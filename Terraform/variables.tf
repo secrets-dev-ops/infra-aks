@@ -33,8 +33,3 @@ variable "admin_password" {
     type = string
     description = "password ssh"
 }
-
-variable "resource_group_name" {
-    type = string
-    description = "Resource Group Name"
-}
