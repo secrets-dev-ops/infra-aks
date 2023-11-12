@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_kubernetes_cluster" "main" {
+resource "azurerm_kubernetes_cluster" "twitter-aks" {
   name                             = "${var.prefix_name}-aks"
   location                         = var.region
   resource_group_name              = var.resource_group_name
@@ -80,4 +80,16 @@ resource "azurerm_cosmosdb_mongo_database" "twitter-db" {
   resource_group_name = azurerm_cosmosdb_account.db_account.resource_group_name
   account_name        = azurerm_cosmosdb_account.db_account.name
   throughput          = 400
+}
+
+resource "null_resource" "set_cosmos_db_connection_string" {
+  triggers = {
+    cosmos_db_connection_string_base64 = base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])
+  }
+
+  provisioner "local-exec" {
+    command = "echo ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])} > ../string-connection-encoded.txt"
+    working_dir = "${path.module}"
+
+  }
 }

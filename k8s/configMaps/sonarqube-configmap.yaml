@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonar-config
+  namespace: metrics
+  labels:
+    app: sonar
+data:
+  SONAR_JDBC_URL: "jdbc:postgresql://postgres:5432/sonar"
+  SONAR_JDBC_USERNAME: "sonar"
+  SONAR_JDBC_PASSWORD: "sonar"
