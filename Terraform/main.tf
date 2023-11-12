@@ -82,17 +82,18 @@ resource "azurerm_cosmosdb_mongo_database" "twitter-db" {
   throughput          = 400
 }
 
-resource "null_resource" "create_env_file" {
+resource "null_resource" "set_cosmos_db_connection_string" {
   triggers = {
     cosmos_db_connection_string_base64 = base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])
   }
 
   provisioner "local-exec" {
     command = <<EOF
-        sed -i "s/database_url: secret/database_url: ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])}/g" ../k8s/secrets/backend-secrets.yaml
-        sed -i "s/database_url: secret/database_url: ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])}/g" ../k8s/secrets/frontend-secrets.yaml
+        echo pwd
+        sed -i -e "s/database_url: secret/database_url: ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])}/g" ../k8s/secrets/backend-secrets.yaml
+        sed -i -e "s/database_url: secret/database_url: ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])}/g" ../k8s/secrets/frontend-secrets.yaml
     EOF
-    working_dir = path.module
-    
+    working_dir = "${path.module}"
+
   }
 }
