@@ -3,16 +3,6 @@ variable "resource_group_name" {
   type        = string
 }
   
-variable "resource_group_location" {
-  description = "value of the location"
-  type        = string
-}
-
-variable "tags" {
-  description = "tags for the resource"
-  type        = map(any)
-  default     = {}
-}
 
 variable "region" {
     type = string
@@ -24,12 +14,3 @@ variable "prefix_name" {
     description = "Prefix for resources names"
 }
 
-variable "admin_username" {
-    type = string
-    description = "usuario ssh"
-}
-
-variable "admin_password" {
-    type = string
-    description = "password ssh"
-}
