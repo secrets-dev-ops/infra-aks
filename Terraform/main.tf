@@ -88,11 +88,7 @@ resource "null_resource" "set_cosmos_db_connection_string" {
   }
 
   provisioner "local-exec" {
-    command = <<EOF
-        echo pwd
-        sed -i -e "s/database_url: secret/database_url: ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])}/g" ../k8s/secrets/backend-secrets.yaml
-        sed -i -e "s/database_url: secret/database_url: ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])}/g" ../k8s/secrets/frontend-secrets.yaml
-    EOF
+    command = "echo ${base64encode(azurerm_cosmosdb_account.db_account.connection_strings[0])} > ../string-connection-encoded.txt"
     working_dir = "${path.module}"
 
   }
