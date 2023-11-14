@@ -7,3 +7,5 @@ spec:
     requests:
       storage: 10Gi
   volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
