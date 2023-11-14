@@ -1,6 +1,19 @@
 provider "azurerm" {
   features {}
 }
+
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.resource_group_location
+  tags     = var.tags
+}
+resource "azurerm_container_registry" "main" {
+  name                     = "twitterCloneContainerRegistry"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  sku                      = "Basic"
+  admin_enabled            = true
+}
 ### -----------------------NETWORK--------------------- ###
 # Creación de la red virtual
 resource "azurerm_virtual_network" "main" {
@@ -19,7 +32,7 @@ resource "azurerm_subnet" "subnet" {
 
 resource "azurerm_public_ip" "public_ip" {
   name                = "public-ip"
-  resource_group_name = var.resource_group_nameSS
+  resource_group_name = var.resource_group_name
   location            = var.region
   allocation_method   = "Static"
   sku                 = "Standard" 

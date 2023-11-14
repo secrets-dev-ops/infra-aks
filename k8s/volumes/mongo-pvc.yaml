@@ -1,0 +1,9 @@
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-persistent-storage
+  namespace: backend-services-ns
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
