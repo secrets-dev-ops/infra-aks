@@ -14,20 +14,28 @@ spec:
     metadata:
       labels:
         app:  twitter-auth
-  spec:
-    containers:
-    - name: twitter-auth
-      image: acrtwitter.azurecr.io/twitter-auth-service:latest
-      env:
-      - name: DATABASE_URL
-        valueFrom:
-          secretKeyRef:
-            name: backend-secrets
-            key: database_url
-      - name: NEXTAUTH_JWT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: backend-secrets
-            key: next_auth_jwt_secret
-      ports:
-      - containerPort: 3002
+    spec:
+      containers:
+      - name: twitter-auth
+        image: acrtwitter.azurecr.io/twitter-auth-service:latest
+        imagePullPolicy: Always
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: database_url
+        - name: NEXTAUTH_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: next_auth_jwt_secret
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        ports:
+        - containerPort: 3002

@@ -14,46 +14,52 @@ spec:
     metadata:
       labels:
         app:  twitter-front
-  spec:
-  containers:
-  - name: twitter-front
-    image: acrtwitter.azurecr.io/twitter-frontend:latest
-    env:
-    - name: URL_UTIL
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: util_url
-    - name: URL_USER
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: user_url
-    - name: URL_AUTH
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: auth_url
-    - name: URL_POSTNOTI
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: postnoti_url
-    - name: DATABASE_URL
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: database_url
-    - name: NEXTAUTH_JWT_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: next_auth_jwt_secret
-    - name: NEXTAUTH_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: frontend-secrets
-          key: next_auth_secret
-    ports:
-    - containerPort: 3003
+    spec:
+      containers:
+      - name: twitter-front
+        image: acrtwitter.azurecr.io/twitter-frontend:lates
+        imagePullPolicy: Always
+        env:
+        - name: URL_UTIL
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: util_url
+        - name: URL_USER
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: user_url
+        - name: URL_AUTH
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: auth_url
+        - name: URL_POSTNOTI
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: postnoti_url
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: database_url
+        - name: NEXTAUTH_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: next_auth_jwt_secret
+        - name: NEXTAUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: next_auth_secret
+        - name: NEXTAUTH_URL
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secrets
+              key: nex_auth_url      
+        ports:
+        - containerPort: 3003
 

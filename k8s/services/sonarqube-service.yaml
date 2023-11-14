@@ -12,4 +12,3 @@ spec:
     name: sonar
   selector:
     app: sonar
-  type: NodePort  

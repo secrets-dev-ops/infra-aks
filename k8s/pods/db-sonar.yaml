@@ -70,13 +70,6 @@ spec:
         volumeMounts:
         - name: postgres
           mountPath: /bitnami/postgresql
-        resources:
-          limits:
-            cpu: "1"
-            memory: "1Gi"
-          requests:
-            cpu: "500m"
-            memory: "500Mi"
       volumes:
       - name: postgres
         persistentVolumeClaim:

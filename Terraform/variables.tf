@@ -14,3 +14,8 @@ variable "prefix_name" {
     description = "Prefix for resources names"
 }
 
+variable "acr_id"{
+    type = string
+    description = "id for acr"
+}
+
