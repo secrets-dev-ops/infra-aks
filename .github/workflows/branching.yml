@@ -6,28 +6,6 @@ on:
       - master
 
 jobs:
-  create-release-branch:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Create Release Branch
-      run: |
-        git config pull.rebase false 
-        # Obtener el número de la solicitud de extracción (PR)
-        PR_NUMBER=$(echo ${{ github.event.number }})
-
-        # Asegurarse de que la rama principal esté sincronizada
-        git pull origin master
-
-        # Crear una nueva rama de release basada en la rama principal
-        git checkout -b release/${PR_NUMBER}
-
-        # Empujar la nueva rama al repositorio remoto
-        git push origin release/${PR_NUMBER}
-
   create-tag-on-merge:
     runs-on: ubuntu-latest
 
