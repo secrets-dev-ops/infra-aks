@@ -1,0 +1,47 @@
+name: GitHub Flow Pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create Release Branch
+      run: |
+        # Obtener el número de la solicitud de extracción (PR)
+        PR_NUMBER=$(echo ${{ github.event.number }})
+
+        # Crear una nueva rama de release basada en la rama master
+        git checkout master
+        git pull origin master
+        git checkout -b release/${PR_NUMBER}
+
+        # Empujar la nueva rama al repositorio remoto
+        git push origin release/${PR_NUMBER}
+
+  create-tag-on-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create Tag on Merge
+      if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged
+      run: |
+        # Obtener el número de la solicitud de extracción (PR) cerrada
+        PR_NUMBER=$(echo ${{ github.event.number }})
+
+        # Crear una etiqueta basada en el número de la solicitud de extracción
+        git tag -a v1.${PR_NUMBER} -m "Version 1.${PR_NUMBER}"
+
+        # Empujar la etiqueta al repositorio remoto
+        git push origin v1.${PR_NUMBER}
+
