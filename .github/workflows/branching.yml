@@ -21,6 +21,8 @@ jobs:
         # Asegurarse de que la rama principal esté sincronizada
         git pull origin master
 
+        git config pull.rebase false 
+
         # Crear una nueva rama de release basada en la rama principal
         git checkout -b release/${PR_NUMBER}
 
