@@ -15,13 +15,12 @@ jobs:
 
     - name: Create Release Branch
       run: |
+        git config pull.rebase false 
         # Obtener el número de la solicitud de extracción (PR)
         PR_NUMBER=$(echo ${{ github.event.number }})
 
         # Asegurarse de que la rama principal esté sincronizada
         git pull origin master
-
-        git config pull.rebase false 
 
         # Crear una nueva rama de release basada en la rama principal
         git checkout -b release/${PR_NUMBER}
